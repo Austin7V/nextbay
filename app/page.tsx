@@ -4,13 +4,15 @@ import { getAuctions } from "@/lib/auctionsService";
 type HomePageProps = {
   searchParams: Promise<{
     page?: string;
+    limit?: string;
   }>;
 };
 
 export default async function HomePage({ searchParams }: HomePageProps) {
   const params = await searchParams;
   const page = params.page ?? "1";
-  const auctionsResponse = await getAuctions(page);
+  const limit = params.limit ?? "5";
+  const auctionsResponse = await getAuctions(page, limit);
   const auctions = auctionsResponse.items;
 
   const meta = auctionsResponse.meta;
