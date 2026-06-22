@@ -19,13 +19,15 @@ export type AuctionsResponse = {
   };
 };
 
-export async function getAuctions(): Promise<AuctionsResponse> {
+export async function getAuctions(page = "1"): Promise<AuctionsResponse> {
   const apiUrl = process.env.DARKBAY_API_URL;
   if (!apiUrl) {
     throw new Error("Darkbay api url is not defined!");
   }
 
-  const response = await fetch(`${apiUrl}/auctions`);
+  const url = `${apiUrl}/auctions?page=${page}`;
+
+  const response = await fetch(url);
   if (!response.ok) {
     throw new Error("Failed to fetch auctions!");
   }

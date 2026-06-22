@@ -1,8 +1,16 @@
 import Link from "next/link";
 import { getAuctions } from "@/lib/auctionsService";
 
-export default async function HomePage() {
-  const auctionsResponse = await getAuctions();
+type HomePageProps = {
+  searchParams: Promise<{
+    page?: string;
+  }>;
+};
+
+export default async function HomePage({ searchParams }: HomePageProps) {
+  const params = await searchParams;
+  const page = params.page ?? "1";
+  const auctionsResponse = await getAuctions(page);
   const auctions = auctionsResponse.items;
 
   return (
