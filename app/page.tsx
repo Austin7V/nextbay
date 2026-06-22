@@ -1,14 +1,37 @@
 import Link from "next/link";
 import { getAuctions } from "@/lib/auctionsService";
 
-export default async function HomePage() {
-  const auctionsResponse = await getAuctions();
+type HomePageProps = {
+  searchParams: Promise<{
+    page?: string;
+    limit?: string;
+    status?: string;
+  }>;
+};
+
+export default async function HomePage({ searchParams }: HomePageProps) {
+  const params = await searchParams;
+  const page = params.page ?? "1";
+  const limit = params.limit ?? "5";
+  const status = params.status;
+  const auctionsResponse = await getAuctions(page, limit, status);
   const auctions = auctionsResponse.items;
+
+  const meta = auctionsResponse.meta;
+  const previousPage = meta.currentPage - 1;
+  const nextPage = meta.currentPage + 1;
 
   return (
     <main>
       <h1>NextBay</h1>
       <p>Actions marketplace.</p>
+      <nav>
+        <Link href={`/?page=1&limit=${limit}`}>All</Link>
+        {" | "}
+        <Link href={`/?page=1&limit=${limit}&status=open`}>Open</Link>
+        {" | "}
+        <Link href={`/?page=1&limit=${limit}&status=closed`}>Closed</Link>
+      </nav>
 
       <ul>
         {auctions.map((auction) => (
@@ -24,6 +47,21 @@ export default async function HomePage() {
           </li>
         ))}
       </ul>
+      <nav>
+        {previousPage >= 1 && (
+          <Link href={`/?page=${previousPage}&limit=${limit}`}>
+            Previous page
+          </Link>
+        )}
+
+        <span>
+          Page {meta.currentPage} of {meta.totalPages}
+        </span>
+
+        {nextPage <= meta.totalPages && (
+          <Link href={`/?page=${nextPage}&limit=${limit}`}>Next page</Link>
+        )}
+      </nav>
     </main>
   );
 }
