@@ -22,13 +22,24 @@ export type AuctionsResponse = {
 export async function getAuctions(
   page = "1",
   limit = "5",
+  status?: string,
 ): Promise<AuctionsResponse> {
   const apiUrl = process.env.DARKBAY_API_URL;
+
   if (!apiUrl) {
     throw new Error("Darkbay api url is not defined!");
   }
 
-  const url = `${apiUrl}/auctions?page=${page}&limit=${limit}`;
+  const searchParams = new URLSearchParams({
+    page,
+    limit,
+  });
+
+  if (status) {
+    searchParams.set("status", status);
+  }
+
+  const url = `${apiUrl}/auctions?${searchParams.toString()}`;
 
   const response = await fetch(url);
   if (!response.ok) {
