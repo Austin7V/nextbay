@@ -1,3 +1,5 @@
+import { notFound } from "next/navigation";
+
 export type Auction = {
   id: string;
   title: string;
@@ -56,8 +58,12 @@ export async function getAuctionById(id: string): Promise<Auction> {
   }
 
   const response = await fetch(`${apiUrl}/auctions/${id}`);
+  if (response.status === 404) {
+    notFound();
+  }
+
   if (!response.ok) {
-    throw new Error("Faled to fetch auction");
+    throw new Error("Failed to fetch auction");
   }
   return response.json();
 }
