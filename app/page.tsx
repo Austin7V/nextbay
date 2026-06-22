@@ -13,6 +13,10 @@ export default async function HomePage({ searchParams }: HomePageProps) {
   const auctionsResponse = await getAuctions(page);
   const auctions = auctionsResponse.items;
 
+  const meta = auctionsResponse.meta;
+  const previousPage = meta.currentPage - 1;
+  const nextPage = meta.currentPage + 1;
+
   return (
     <main>
       <h1>NextBay</h1>
@@ -32,6 +36,19 @@ export default async function HomePage({ searchParams }: HomePageProps) {
           </li>
         ))}
       </ul>
+      <nav>
+        {previousPage >= 1 && (
+          <Link href={`/?page=${previousPage}`}>Previous page</Link>
+        )}
+
+        <span>
+          Page {meta.currentPage} of {meta.totalPages}
+        </span>
+
+        {nextPage <= meta.totalPages && (
+          <Link href={`/?page=${nextPage}`}>Next page</Link>
+        )}
+      </nav>
     </main>
   );
 }
