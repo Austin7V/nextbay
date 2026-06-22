@@ -40,7 +40,9 @@ export default async function HomePage({ searchParams }: HomePageProps) {
       </ul>
       <nav>
         {previousPage >= 1 && (
-          <Link href={`/?page=${previousPage}`}>Previous page</Link>
+          <Link href={`/?page=${previousPage}&limit=${limit}`}>
+            Previous page
+          </Link>
         )}
 
         <span>
@@ -48,7 +50,7 @@ export default async function HomePage({ searchParams }: HomePageProps) {
         </span>
 
         {nextPage <= meta.totalPages && (
-          <Link href={`/?page=${nextPage}`}>Next page</Link>
+          <Link href={`/?page=${nextPage}&limit=${limit}`}>Next page</Link>
         )}
       </nav>
     </main>
