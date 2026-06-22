@@ -1,3 +1,5 @@
+import { notFound } from "next/navigation";
+
 export type Auction = {
   id: string;
   title: string;
@@ -46,5 +48,22 @@ export async function getAuctions(
     throw new Error("Failed to fetch auctions!");
   }
 
+  return response.json();
+}
+
+export async function getAuctionById(id: string): Promise<Auction> {
+  const apiUrl = process.env.DARKBAY_API_URL;
+  if (!apiUrl) {
+    throw new Error("Darkbay api url is not defined!");
+  }
+
+  const response = await fetch(`${apiUrl}/auctions/${id}`);
+  if (response.status === 404) {
+    notFound();
+  }
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch auction");
+  }
   return response.json();
 }
