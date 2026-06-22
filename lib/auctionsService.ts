@@ -48,3 +48,16 @@ export async function getAuctions(
 
   return response.json();
 }
+
+export async function getAuctionById(id: string): Promise<Auction> {
+  const apiUrl = process.env.DARKBAY_API_URL;
+  if (!apiUrl) {
+    throw new Error("Darkbay api url is not defined!");
+  }
+
+  const response = await fetch(`${apiUrl}/auctions/${id}`);
+  if (!response.ok) {
+    throw new Error("Faled to fetch auction");
+  }
+  return response.json();
+}
