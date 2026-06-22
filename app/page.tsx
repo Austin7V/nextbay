@@ -25,6 +25,13 @@ export default async function HomePage({ searchParams }: HomePageProps) {
     <main>
       <h1>NextBay</h1>
       <p>Actions marketplace.</p>
+      <nav>
+        <Link href={`/?page=1&limit=${limit}`}>All</Link>
+        {" | "}
+        <Link href={`/?page=1&limit=${limit}&status=open`}>Open</Link>
+        {" | "}
+        <Link href={`/?page=1&limit=${limit}&status=closed`}>Closed</Link>
+      </nav>
 
       <ul>
         {auctions.map((auction) => (
