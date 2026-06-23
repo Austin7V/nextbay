@@ -1,5 +1,31 @@
 "use server";
 
-export async function loginAction() {}
+export async function loginAction(formData: FormData) {
+  const apiUrl = process.env.DARKBAY_API_URL;
+  if (!apiUrl) {
+    throw new Error("Darkbay api URL is not defined");
+  }
+
+  const username = formData.get("username");
+  const password = formData.get("password");
+
+  const response = await fetch(`${apiUrl}/auth/login`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      username,
+      password,
+    }),
+  });
+  if (!response.ok) {
+    throw new Error("Login failed");
+  }
+
+  const data = await response.json();
+  console.log("Login response", data);
+}
+
 export async function registerAction() {}
 export async function logoutActions() {}
