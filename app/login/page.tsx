@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { loginAction } from "@/lib/authActions";
 
 export default function LoginPage() {
@@ -13,6 +14,10 @@ export default function LoginPage() {
 
         <button type="submit">Login</button>
       </form>
+
+      <p>
+        Dont have an account? <Link href="/register">Register</Link>
+      </p>
     </main>
   );
 }
