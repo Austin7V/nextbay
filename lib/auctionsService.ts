@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { fetchAPI } from "./fetchAPI";
 
 export type Auction = {
   id: string;
@@ -6,9 +7,9 @@ export type Auction = {
   description: string;
   startingPrice: number;
   currentPrice: number;
-  endDate: Date;
+  endDate: string;
   seller: string;
-  createdAt: Date;
+  createdAt: string;
 };
 
 export type AuctionsResponse = {
@@ -26,12 +27,6 @@ export async function getAuctions(
   limit = "5",
   status?: string,
 ): Promise<AuctionsResponse> {
-  const apiUrl = process.env.DARKBAY_API_URL;
-
-  if (!apiUrl) {
-    throw new Error("Darkbay api url is not defined!");
-  }
-
   const searchParams = new URLSearchParams({
     page,
     limit,
@@ -41,9 +36,8 @@ export async function getAuctions(
     searchParams.set("status", status);
   }
 
-  const url = `${apiUrl}/auctions?${searchParams.toString()}`;
+  const response = await fetchAPI(`/auctions?${searchParams.toString()}`);
 
-  const response = await fetch(url);
   if (!response.ok) {
     throw new Error("Failed to fetch auctions!");
   }
@@ -52,12 +46,8 @@ export async function getAuctions(
 }
 
 export async function getAuctionById(id: string): Promise<Auction> {
-  const apiUrl = process.env.DARKBAY_API_URL;
-  if (!apiUrl) {
-    throw new Error("Darkbay api url is not defined!");
-  }
+  const response = await fetchAPI(`/auctions/${id}`);
 
-  const response = await fetch(`${apiUrl}/auctions/${id}`);
   if (response.status === 404) {
     notFound();
   }
@@ -65,5 +55,6 @@ export async function getAuctionById(id: string): Promise<Auction> {
   if (!response.ok) {
     throw new Error("Failed to fetch auction");
   }
+
   return response.json();
 }
