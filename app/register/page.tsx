@@ -1,9 +1,10 @@
+import Link from "next/link";
 import { registerAction } from "@/lib/authActions";
 
-export default function registerPage() {
+export default function RegisterPage() {
   return (
     <main>
-      <h1>Login</h1>
+      <h1>Register</h1>
       <form action={registerAction}>
         <label htmlFor="username">Username</label>
         <input id="username" name="username" type="text" required />
@@ -11,8 +12,12 @@ export default function registerPage() {
         <label htmlFor="password">Password</label>
         <input id="password" name="password" type="password" required />
 
-        <button type="submit">Registriren</button>
+        <button type="submit">Register</button>
       </form>
+
+      <p>
+        Already have an account? <Link href="/login">Login</Link>
+      </p>
     </main>
   );
 }
