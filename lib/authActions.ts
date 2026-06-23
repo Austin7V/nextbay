@@ -40,7 +40,36 @@ export async function loginAction(formData: FormData) {
   redirect("/");
 }
 
-export async function registerAction() {}
+export async function registerAction(formData: FormData) {
+  const apiUrl = process.env.DARKBAY_API_URL;
+  if (!apiUrl) {
+    throw new Error("Darkbay api URL is not defined");
+  }
+
+  const username = formData.get("username");
+  const password = formData.get("password");
+
+  const response = await fetch(`${apiUrl}/auth/register`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      username,
+      password,
+    }),
+  });
+  if (!response.ok) {
+    throw new Error("Login failed");
+  }
+
+  if (!response.ok) {
+    throw new Error("Login failed");
+  }
+
+  redirect("/login");
+}
+
 export async function logoutAction() {
   const cookieStore = await cookies();
   cookieStore.delete("darkbay_token");
