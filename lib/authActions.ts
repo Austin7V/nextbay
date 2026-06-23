@@ -22,7 +22,6 @@ export async function loginAction(formData: FormData) {
     }),
   });
   if (!response.ok) {
-    const errorText = await response.text();
     throw new Error("Login failed");
   }
 
