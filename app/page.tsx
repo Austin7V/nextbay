@@ -32,7 +32,11 @@ export default async function HomePage({ searchParams }: HomePageProps) {
             <button type="submit">Logout</button>
           </form>
         ) : (
-          <Link href="/login">Login</Link>
+          <>
+            <Link href="/login">Login</Link>
+            {" | "}
+            <Link href="/register">Register</Link>
+          </>
         )}
       </nav>
       <p>Actions marketplace.</p>
