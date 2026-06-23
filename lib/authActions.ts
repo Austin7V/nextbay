@@ -1,6 +1,7 @@
 "use server";
 
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 export async function loginAction(formData: FormData) {
   const apiUrl = process.env.DARKBAY_API_URL;
@@ -35,6 +36,8 @@ export async function loginAction(formData: FormData) {
     sameSite: "lax",
     path: "/",
   });
+
+  redirect("/");
 }
 
 export async function registerAction() {}
