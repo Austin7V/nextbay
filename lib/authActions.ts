@@ -1,5 +1,7 @@
 "use server";
 
+import { cookies } from "next/headers";
+
 export async function loginAction(formData: FormData) {
   const apiUrl = process.env.DARKBAY_API_URL;
   if (!apiUrl) {
@@ -20,11 +22,20 @@ export async function loginAction(formData: FormData) {
     }),
   });
   if (!response.ok) {
+    const errorText = await response.text();
     throw new Error("Login failed");
   }
 
   const data = await response.json();
-  console.log("Login response", data);
+
+  const cookieStore = await cookies();
+
+  cookieStore.set("darkbay_token", data.access_token, {
+    httpOnly: true,
+    secure: false,
+    sameSite: "lax",
+    path: "/",
+  });
 }
 
 export async function registerAction() {}
