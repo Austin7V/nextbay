@@ -47,3 +47,9 @@ export async function logoutActions() {
 
   redirect("/login");
 }
+
+export async function isAuthenticated() {
+  const cookieStore = await cookies();
+  const token = cookieStore.get("darkbay_token");
+  return Boolean(token);
+}
