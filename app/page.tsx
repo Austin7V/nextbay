@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getAuctions } from "@/lib/auctionsService";
+import { isAuthenticated, logoutAction } from "@/lib/authActions";
 
 type HomePageProps = {
   searchParams: Promise<{
@@ -14,6 +15,7 @@ export default async function HomePage({ searchParams }: HomePageProps) {
   const page = params.page ?? "1";
   const limit = params.limit ?? "5";
   const status = params.status;
+  const loggedIn = await isAuthenticated();
   const auctionsResponse = await getAuctions(page, limit, status);
   const auctions = auctionsResponse.items;
 
@@ -24,6 +26,15 @@ export default async function HomePage({ searchParams }: HomePageProps) {
   return (
     <main>
       <h1>NextBay</h1>
+      <nav>
+        {loggedIn ? (
+          <form action={logoutAction}>
+            <button type="submit">Logout</button>
+          </form>
+        ) : (
+          <Link href="/login">Login</Link>
+        )}
+      </nav>
       <p>Actions marketplace.</p>
       <nav>
         <Link href={`/?page=1&limit=${limit}`}>All</Link>

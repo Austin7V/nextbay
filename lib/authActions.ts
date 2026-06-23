@@ -41,7 +41,7 @@ export async function loginAction(formData: FormData) {
 }
 
 export async function registerAction() {}
-export async function logoutActions() {
+export async function logoutAction() {
   const cookieStore = await cookies();
   cookieStore.delete("darkbay_token");
 
