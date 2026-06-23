@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 
-export async function fetchApi(path: string, options: Requestinit = {}) {
+export async function fetchAPI(path: string, options: RequestInit = {}) {
   const apiUrl = process.env.DARKBAY_API_URL;
   if (!apiUrl) {
     throw new Error("Darkbay api Url is not defined");
