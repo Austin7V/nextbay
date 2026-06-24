@@ -1,6 +1,8 @@
 "use client";
 
 import { useActionState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { createOfferAction, type OfferActionState } from "@/lib/offersActions";
 
 type BidFormProps = {
@@ -23,7 +25,7 @@ export default function BidForm({ auctionId, minimumAmount }: BidFormProps) {
       <input type="hidden" name="auctionId" value={auctionId} />
 
       <label htmlFor="amount">Amount</label>
-      <input
+      <Input
         id="amount"
         name="amount"
         type="number"
@@ -33,9 +35,9 @@ export default function BidForm({ auctionId, minimumAmount }: BidFormProps) {
 
       {state.error && <p>{state.error}</p>}
 
-      <button type="submit" disabled={pending}>
+      <Button type="submit" disabled={pending}>
         {pending ? "Placing bid..." : "Place bid"}
-      </button>
+      </Button>
     </form>
   );
 }
