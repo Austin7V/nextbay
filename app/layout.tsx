@@ -4,8 +4,9 @@ import { isAuthenticated, logoutAction } from "@/lib/authActions";
 import "./globals.css";
 import { Geist } from "next/font/google";
 import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
+const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
   title: "NextBay",
@@ -24,24 +25,35 @@ export default async function RootLayout({
       <body>
         <header>
           <nav>
-            <Link href="/">Home</Link>
-            {" | "}
-            <Link href="/auctions">Auctions</Link>
-            {" | "}
+            <Button asChild variant="ghost">
+              <Link href="/">Home</Link>
+            </Button>
+
+            <Button asChild variant="ghost">
+              <Link href="/auctions">Auctions</Link>
+            </Button>
 
             {loggedIn ? (
               <>
-                <Link href="/auctions/new">Create auction</Link>
-                {" | "}
+                <Button asChild variant="ghost">
+                  <Link href="/auctions/new">Create auction</Link>
+                </Button>
+
                 <form action={logoutAction} style={{ display: "inline" }}>
-                  <button type="submit">Logout</button>
+                  <Button type="submit" variant="outline">
+                    Logout
+                  </Button>
                 </form>
               </>
             ) : (
               <>
-                <Link href="/login">Login</Link>
-                {" | "}
-                <Link href="/register">Register</Link>
+                <Button asChild variant="ghost">
+                  <Link href="/login">Login</Link>
+                </Button>
+
+                <Button asChild variant="outline">
+                  <Link href="/register">Register</Link>
+                </Button>
               </>
             )}
           </nav>
