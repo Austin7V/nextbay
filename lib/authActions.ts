@@ -3,10 +3,19 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
-export async function loginAction(formData: FormData) {
+export type AuthActionState = {
+  error: string | null;
+};
+
+export async function loginAction(
+  previousState: AuthActionState,
+  formData: FormData,
+): Promise<AuthActionState> {
   const apiUrl = process.env.DARKBAY_API_URL;
   if (!apiUrl) {
-    throw new Error("Darkbay api URL is not defined");
+    return {
+      error: "Server configuration error.",
+    };
   }
 
   const username = formData.get("username");
@@ -22,8 +31,11 @@ export async function loginAction(formData: FormData) {
       password,
     }),
   });
+
   if (!response.ok) {
-    throw new Error("Login failed");
+    return {
+      error: "Invalid username or password.",
+    };
   }
 
   const data = await response.json();
