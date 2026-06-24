@@ -3,11 +3,22 @@
 import { revalidatePath } from "next/cache";
 import { fetchAPI } from "./fetchAPI";
 
-export async function createOfferAction(formData: FormData) {
+export type OfferActionState = {
+  error: string | null;
+};
+
+export async function createOfferAction(
+  _previousState: OfferActionState,
+  formData: FormData,
+): Promise<OfferActionState> {
   const auctionId = formData.get("auctionId");
+
   const amount = Number(formData.get("amount"));
+
   if (typeof auctionId !== "string") {
-    throw new Error("Auction id is missing");
+    return {
+      error: "Auction id is missing.",
+    };
   }
 
   const response = await fetchAPI(`/auctions/${auctionId}/offers`, {
@@ -20,9 +31,22 @@ export async function createOfferAction(formData: FormData) {
     }),
   });
 
+  if (response.status === 401) {
+    return {
+      error: "You must be logged in to place a bid.",
+    };
+  }
+
   if (!response.ok) {
-    throw new Error("Failed to create offer");
+    return {
+      error:
+        "Failed to place bid. The amount may be too low or the auction is closed.",
+    };
   }
 
   revalidatePath(`/auctions/${auctionId}`);
+
+  return {
+    error: null,
+  };
 }

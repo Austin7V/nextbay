@@ -1,6 +1,7 @@
 import { getAuctionById } from "@/lib/auctionsService";
 import { getOffersByAuctionId } from "@/lib/offersService";
 import { createOfferAction } from "@/lib/offersActions";
+import BidForm from "./BidForm";
 
 type AuctionDetailPageProps = {
   params: Promise<{
@@ -46,20 +47,10 @@ export default async function AuctionDetailPage({
       <section>
         <h2>Place a bid</h2>
 
-        <form action={createOfferAction}>
-          <input type="hidden" name="auctionId" value={auction.id} />
-
-          <label htmlFor="amount">Amount</label>
-          <input
-            id="amount"
-            name="amount"
-            type="number"
-            min={auction.currentPrice + 1}
-            required
-          />
-
-          <button type="submit">Place bid</button>
-        </form>
+        <BidForm
+          auctionId={auction.id}
+          minimumAmount={auction.currentPrice + 1}
+        />
       </section>
     </main>
   );
