@@ -4,7 +4,14 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { fetchAPI } from "./fetchAPI";
 
-export async function createAuctionAction(formData: FormData) {
+export type AuctionActionState = {
+  error: string | null;
+};
+
+export async function createAuctionAction(
+  _previousState: AuctionActionState,
+  formData: FormData,
+): Promise<AuctionActionState> {
   const title = formData.get("title");
   const description = formData.get("description");
   const startingPrice = Number(formData.get("startingPrice"));
@@ -20,9 +27,20 @@ export async function createAuctionAction(formData: FormData) {
       startingPrice,
     }),
   });
-  if (!response.ok) {
-    throw new Error("Failed to create auction");
+
+  if (response.status === 401) {
+    return {
+      error: "You must be logged in to create an auction.",
+    };
   }
-  revalidatePath("/");
-  redirect("/");
+
+  if (!response.ok) {
+    return {
+      error: "Failed to create auction.",
+    };
+  }
+
+  revalidatePath("/auctions");
+
+  redirect("/auctions");
 }
