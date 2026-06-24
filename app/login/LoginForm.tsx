@@ -1,6 +1,8 @@
 "use client";
 
 import { useActionState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { loginAction, type AuthActionState } from "@/lib/authActions";
 
 const initialState: AuthActionState = {
@@ -16,16 +18,16 @@ export default function LoginForm() {
   return (
     <form action={formAction}>
       <label htmlFor="username">Username</label>
-      <input id="username" name="username" type="text" required />
+      <Input id="username" name="username" type="text" required />
 
       <label htmlFor="password">Password</label>
-      <input id="password" name="password" type="password" required />
+      <Input id="password" name="password" type="password" required />
 
       {state.error && <p>{state.error}</p>}
 
-      <button type="submit" disabled={pending}>
+      <Button type="submit" disabled={pending}>
         {pending ? "Logging in..." : "Login"}
-      </button>
+      </Button>
     </form>
   );
 }
