@@ -2,6 +2,13 @@ import { getAuctionById } from "@/lib/auctionsService";
 import { getOffersByAuctionId } from "@/lib/offersService";
 import { createOfferAction } from "@/lib/offersActions";
 import BidForm from "./BidForm";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 type AuctionDetailPageProps = {
   params: Promise<{
@@ -19,39 +26,54 @@ export default async function AuctionDetailPage({
 
   return (
     <main>
-      <h1>{auction.title}</h1>
+      <Card>
+        <CardHeader>
+          <CardTitle>{auction.title}</CardTitle>
+          <CardDescription>{auction.description}</CardDescription>
+        </CardHeader>
 
-      <p>{auction.description}</p>
-      <p>Starting price: {auction.startingPrice} €</p>
-      <p>Current price: {auction.currentPrice} €</p>
-      <p>Seller: {auction.seller}</p>
-      <p>Ends at: {new Date(auction.endDate).toLocaleDateString()}</p>
-      <section>
-        <h2>Bid history</h2>
+        <CardContent>
+          <p>Starting price: {auction.startingPrice} €</p>
+          <p>Current price: {auction.currentPrice} €</p>
+          <p>Seller: {auction.seller}</p>
+          <p>Ends at: {new Date(auction.endDate).toLocaleDateString()}</p>
+        </CardContent>
+      </Card>
 
-        {offers.length === 0 ? (
-          <p>No offers yet.</p>
-        ) : (
-          <ul>
-            {offers.map((offer) => (
-              <li key={offer.id}>
-                <p>Amount: {offer.amount} €</p>
-                <p>Bidder: {offer.bidder}</p>
-                <p>Date: {new Date(offer.createdAt).toLocaleDateString()}</p>
-              </li>
-            ))}
-          </ul>
-        )}
-      </section>
+      <Card>
+        <CardHeader>
+          <CardTitle>Bid history</CardTitle>
+        </CardHeader>
 
-      <section>
-        <h2>Place a bid</h2>
+        <CardContent>
+          {offers.length === 0 ? (
+            <p>No offers yet.</p>
+          ) : (
+            <ul>
+              {offers.map((offer) => (
+                <li key={offer.id}>
+                  <p>Amount: {offer.amount} €</p>
+                  <p>Bidder: {offer.bidder}</p>
+                  <p>Date: {new Date(offer.createdAt).toLocaleDateString()}</p>
+                </li>
+              ))}
+            </ul>
+          )}
+        </CardContent>
+      </Card>
 
-        <BidForm
-          auctionId={auction.id}
-          minimumAmount={auction.currentPrice + 1}
-        />
-      </section>
+      <Card>
+        <CardHeader>
+          <CardTitle>Place a bid</CardTitle>
+        </CardHeader>
+
+        <CardContent>
+          <BidForm
+            auctionId={auction.id}
+            minimumAmount={auction.currentPrice + 1}
+          />
+        </CardContent>
+      </Card>
     </main>
   );
 }

@@ -1,5 +1,13 @@
 import Link from "next/link";
 import { getAuctions } from "@/lib/auctionsService";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 type AuctionsPageProps = {
   searchParams: Promise<{
@@ -42,20 +50,26 @@ export default async function AuctionsPage({
         <Link href="/auctions/new">Create auction</Link>
       </nav>
 
-      <ul>
+      <div>
         {auctions.map((auction) => (
-          <li key={auction.id}>
-            <Link href={`/auctions/${auction.id}`}>
-              <h2>{auction.title}</h2>
-            </Link>
+          <Card key={auction.id}>
+            <CardHeader>
+              <CardTitle>{auction.title}</CardTitle>
+              <CardDescription>{auction.description}</CardDescription>
+            </CardHeader>
 
-            <p>{auction.description}</p>
-            <p>Current price: {auction.currentPrice} €</p>
-            <p>Seller: {auction.seller}</p>
-            <p>Ends at: {new Date(auction.endDate).toLocaleDateString()}</p>
-          </li>
+            <CardContent>
+              <p>Current price: {auction.currentPrice} €</p>
+              <p>Seller: {auction.seller}</p>
+              <p>Ends at: {new Date(auction.endDate).toLocaleDateString()}</p>
+
+              <Button asChild>
+                <Link href={`/auctions/${auction.id}`}>View auction</Link>
+              </Button>
+            </CardContent>
+          </Card>
         ))}
-      </ul>
+      </div>
 
       <nav>
         {previousPage >= 1 && (
