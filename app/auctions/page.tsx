@@ -52,18 +52,23 @@ export default async function AuctionsPage({
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {auctions.map((auction) => (
-          <Card key={auction.id}>
+          <Card
+            key={auction.id}
+            className="border-border bg-card transition hover:-translate-y-1 hover:border-primary/50 hover:shadow-lg"
+          >
             <CardHeader>
               <CardTitle>{auction.title}</CardTitle>
               <CardDescription>{auction.description}</CardDescription>
             </CardHeader>
 
-            <CardContent>
-              <p>Current price: {auction.currentPrice} €</p>
+            <CardContent className="space-y-3">
+              <p className="text-lg font-semibold text-primary">
+                Current price: {auction.currentPrice} €
+              </p>
               <p>Seller: {auction.seller}</p>
               <p>Ends at: {new Date(auction.endDate).toLocaleDateString()}</p>
 
-              <Button asChild>
+              <Button asChild className="w-full">
                 <Link href={`/auctions/${auction.id}`}>View auction</Link>
               </Button>
             </CardContent>
