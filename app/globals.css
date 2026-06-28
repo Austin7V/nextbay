@@ -372,3 +372,23 @@
     0 0 0 2px color-mix(in oklab, var(--primary) 25%, transparent),
     inset 0 0 14px color-mix(in oklab, var(--primary) 14%, transparent);
 }
+
+body,
+button,
+input,
+textarea,
+select,
+a,
+p,
+span,
+label,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+li,
+div {
+  font-family: var(--font-pixel), monospace;
+}
