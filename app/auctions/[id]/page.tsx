@@ -26,10 +26,14 @@ export default async function AuctionDetailPage({
 
   return (
     <main className="space-y-6">
-      <Card className="border-border bg-card">
+      <Card className="pixel-card terminal-panel">
         <CardHeader>
-          <CardTitle>{auction.title}</CardTitle>
-          <CardDescription>{auction.description}</CardDescription>
+          <CardTitle className="terminal-text text-3xl text-primary">
+            {auction.title}
+          </CardTitle>
+          <CardDescription className="font-mono text-muted-foreground">
+            {auction.description}
+          </CardDescription>
         </CardHeader>
 
         <CardContent className="space-y-2">
@@ -42,9 +46,11 @@ export default async function AuctionDetailPage({
         </CardContent>
       </Card>
 
-      <Card>
+      <Card className="pixel-card">
         <CardHeader>
-          <CardTitle>Bid history</CardTitle>
+          <CardTitle className="terminal-text text-primary">
+            Bid history
+          </CardTitle>
         </CardHeader>
 
         <CardContent>
@@ -73,9 +79,11 @@ export default async function AuctionDetailPage({
         </CardContent>
       </Card>
 
-      <Card>
+      <Card className="pixel-card">
         <CardHeader>
-          <CardTitle>Place a bid</CardTitle>
+          <CardTitle className="terminal-text text-primary">
+            Place a bid
+          </CardTitle>
         </CardHeader>
 
         <CardContent>
