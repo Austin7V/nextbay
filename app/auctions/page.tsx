@@ -73,33 +73,55 @@ export default async function AuctionsPage({
         </Button>
       </nav>
 
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {auctions.map((auction) => (
-          <Card
-            key={auction.id}
-            className="pixel-card transition hover:-translate-y-1"
-          >
-            <CardHeader>
-              <CardTitle className="terminal-text text-primary">
-                {auction.title}
-              </CardTitle>
-              <CardDescription>{auction.description}</CardDescription>
-            </CardHeader>
+      {auctions.length === 0 ? (
+        <div className="pixel-card terminal-panel scanline-overlay p-8 text-center">
+          <p className="terminal-text text-sm text-destructive">
+            NO RECORDS FOUND // AUCTION GRID EMPTY
+          </p>
 
-            <CardContent className="space-y-3">
-              <p className="text-lg font-semibold text-primary">
-                Current price: {auction.currentPrice} €
-              </p>
-              <p>Seller: {auction.seller}</p>
-              <p>Ends at: {new Date(auction.endDate).toLocaleDateString()}</p>
+          <h2 className="matrix-glow mt-4 font-mono text-2xl font-black text-primary">
+            NO ACTIVE AUCTIONS
+          </h2>
 
-              <Button asChild className="w-full">
-                <Link href={`/auctions/${auction.id}`}>View auction</Link>
-              </Button>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
+          <p className="mt-4 font-mono text-muted-foreground">
+            There are no classified auction records available right now.
+          </p>
+
+          <Button asChild className="pixel-button mt-6">
+            <Link href="/auctions/new">Create first auction</Link>
+          </Button>
+        </div>
+      ) : (
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {auctions.map((auction) => (
+            <Card
+              key={auction.id}
+              className="pixel-card transition hover:-translate-y-1"
+            >
+              <CardHeader>
+                <CardTitle className="terminal-text text-primary">
+                  {auction.title}
+                </CardTitle>
+
+                <CardDescription>{auction.description}</CardDescription>
+              </CardHeader>
+
+              <CardContent className="space-y-3">
+                <p className="text-lg font-semibold text-primary">
+                  Current price: {auction.currentPrice} €
+                </p>
+
+                <p>Seller: {auction.seller}</p>
+                <p>Ends at: {new Date(auction.endDate).toLocaleDateString()}</p>
+
+                <Button asChild className="pixel-button w-full">
+                  <Link href={`/auctions/${auction.id}`}>View auction</Link>
+                </Button>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      )}
 
       <nav className="mt-8 flex items-center justify-center gap-4">
         {previousPage >= 1 && (
