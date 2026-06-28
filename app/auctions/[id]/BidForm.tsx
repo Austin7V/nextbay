@@ -30,6 +30,7 @@ export default function BidForm({ auctionId, minimumAmount }: BidFormProps) {
         name="amount"
         type="number"
         min={minimumAmount}
+        className="pixel-input"
         required
       />
 

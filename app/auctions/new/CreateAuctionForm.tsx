@@ -22,10 +22,21 @@ export default function CreateAuctionForm() {
   return (
     <form action={formAction} className="space-y-4">
       <label htmlFor="title">Title</label>
-      <Input id="title" name="title" type="text" required />
+      <Input
+        id="title"
+        name="title"
+        type="text"
+        className="pixel-input"
+        required
+      />
 
       <label htmlFor="description">Description</label>
-      <Textarea id="description" name="description" required />
+      <Textarea
+        id="description"
+        name="description"
+        className="pixel-input"
+        required
+      />
 
       <label htmlFor="startingPrice">Starting price</label>
       <Input
@@ -33,6 +44,7 @@ export default function CreateAuctionForm() {
         name="startingPrice"
         type="number"
         min="1"
+        className="pixel-input"
         required
       />
 
