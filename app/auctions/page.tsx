@@ -36,28 +36,51 @@ export default async function AuctionsPage({
 
   return (
     <main>
-      <h1>Auctions</h1>
+      <div className="mb-8 space-y-4">
+        <p className="terminal-text text-sm text-primary">
+          AUCTION GRID // ENCRYPTED LISTINGS
+        </p>
 
-      <nav>
-        <Link href={`/auctions?page=1&limit=${limit}`}>All</Link>
-        {" | "}
-        <Link href={`/auctions?page=1&limit=${limit}&status=open`}>Open</Link>
-        {" | "}
-        <Link href={`/auctions?page=1&limit=${limit}&status=closed`}>
-          Closed
-        </Link>
-        {" | "}
-        <Link href="/auctions/new">Create auction</Link>
+        <h1 className="matrix-glow font-mono text-4xl font-black tracking-widest text-primary">
+          ACTIVE AUCTIONS
+        </h1>
+
+        <p className="max-w-2xl font-mono text-muted-foreground">
+          Browse classified auctions, inspect rare assets, and place encrypted
+          bids.
+        </p>
+      </div>
+
+      <nav className="mb-8 flex flex-wrap gap-3">
+        <Button asChild variant="outline" className="pixel-button">
+          <Link href={`/auctions?page=1&limit=${limit}`}>All</Link>
+        </Button>
+
+        <Button asChild variant="outline" className="pixel-button">
+          <Link href={`/auctions?page=1&limit=${limit}&status=open`}>Open</Link>
+        </Button>
+
+        <Button asChild variant="outline" className="pixel-button">
+          <Link href={`/auctions?page=1&limit=${limit}&status=closed`}>
+            Closed
+          </Link>
+        </Button>
+
+        <Button asChild className="pixel-button">
+          <Link href="/auctions/new">Create auction</Link>
+        </Button>
       </nav>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {auctions.map((auction) => (
           <Card
             key={auction.id}
-            className="border-border bg-card transition hover:-translate-y-1 hover:border-primary/50 hover:shadow-lg"
+            className="pixel-card transition hover:-translate-y-1"
           >
             <CardHeader>
-              <CardTitle>{auction.title}</CardTitle>
+              <CardTitle className="terminal-text text-primary">
+                {auction.title}
+              </CardTitle>
               <CardDescription>{auction.description}</CardDescription>
             </CardHeader>
 
@@ -76,25 +99,29 @@ export default async function AuctionsPage({
         ))}
       </div>
 
-      <nav>
+      <nav className="mt-8 flex items-center justify-center gap-4">
         {previousPage >= 1 && (
-          <Link
-            href={`/auctions?page=${previousPage}&limit=${limit}${statusQuery}`}
-          >
-            Previous page
-          </Link>
+          <Button asChild variant="outline" className="pixel-button">
+            <Link
+              href={`/auctions?page=${previousPage}&limit=${limit}${statusQuery}`}
+            >
+              Previous
+            </Link>
+          </Button>
         )}
 
-        <span>
-          Page {meta.currentPage} of {meta.totalPages}
+        <span className="terminal-text text-sm text-primary">
+          PAGE {meta.currentPage} / {meta.totalPages}
         </span>
 
         {nextPage <= meta.totalPages && (
-          <Link
-            href={`/auctions?page=${nextPage}&limit=${limit}${statusQuery}`}
-          >
-            Next page
-          </Link>
+          <Button asChild variant="outline" className="pixel-button">
+            <Link
+              href={`/auctions?page=${nextPage}&limit=${limit}${statusQuery}`}
+            >
+              Next
+            </Link>
+          </Button>
         )}
       </nav>
     </main>
