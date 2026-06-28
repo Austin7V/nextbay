@@ -23,38 +23,42 @@ export default async function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className="secret-grid min-h-screen bg-background text-foreground">
-        <header className="border-b border-primary/30 bg-black/80 backdrop-blur">
-          <nav className="mx-auto flex max-w-6xl flex-wrap items-center gap-2 px-4 py-4">
-            <span className="matrix-glow mr-4 font-mono text-lg font-bold text-primary">
+        <header className="border-b-2 border-primary bg-black/90 shadow-[0_0_24px_rgba(34,197,94,0.18)] backdrop-blur">
+          <nav className="mx-auto flex max-w-6xl flex-wrap items-center gap-3 px-4 py-4">
+            <span className="matrix-glow mr-4 font-mono text-lg font-black tracking-widest text-primary">
               NEXTBAY
             </span>
-            <Button asChild variant="ghost">
+            <Button asChild variant="ghost" className="pixel-button">
               <Link href="/">Home</Link>
             </Button>
 
-            <Button asChild variant="ghost">
+            <Button asChild variant="ghost" className="pixel-button">
               <Link href="/auctions">Auctions</Link>
             </Button>
 
             {loggedIn ? (
               <>
-                <Button asChild variant="ghost">
+                <Button asChild variant="ghost" className="pixel-button">
                   <Link href="/auctions/new">Create auction</Link>
                 </Button>
 
                 <form action={logoutAction} style={{ display: "inline" }}>
-                  <Button type="submit" variant="outline">
+                  <Button
+                    type="submit"
+                    variant="outline"
+                    className="pixel-button"
+                  >
                     Logout
                   </Button>
                 </form>
               </>
             ) : (
               <>
-                <Button asChild variant="ghost">
+                <Button asChild variant="outline" className="pixel-button">
                   <Link href="/login">Login</Link>
                 </Button>
 
-                <Button asChild variant="outline">
+                <Button asChild variant="outline" className="pixel-button">
                   <Link href="/register">Register</Link>
                 </Button>
               </>
