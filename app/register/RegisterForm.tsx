@@ -16,14 +16,14 @@ export default function RegisterForm() {
   );
 
   return (
-    <form action={formAction}>
+    <form action={formAction} className="space-y-4">
       <label htmlFor="username">Username</label>
       <Input id="username" name="username" type="text" required />
 
       <label htmlFor="password">Password</label>
       <Input id="password" name="password" type="password" required />
 
-      {state.error && <p>{state.error}</p>}
+      {state.error && <p className="text-sm text-destructive">{state.error}</p>}
 
       <Button type="submit" disabled={pending}>
         {pending ? "Registering..." : "Register"}
