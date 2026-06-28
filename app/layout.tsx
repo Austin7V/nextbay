@@ -5,6 +5,13 @@ import "./globals.css";
 import { Geist } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { Press_Start_2P } from "next/font/google";
+
+const pixelFont = Press_Start_2P({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-pixel",
+});
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -21,7 +28,7 @@ export default async function RootLayout({
   const loggedIn = await isAuthenticated();
 
   return (
-    <html lang="en" className="dark">
+    <html lang="en" className={`dark ${pixelFont.variable}`}>
       <body className="secret-grid min-h-screen bg-background text-foreground">
         <header className="border-b-2 border-primary bg-black/90 shadow-[0_0_24px_rgba(34,197,94,0.18)] backdrop-blur">
           <nav className="mx-auto flex max-w-6xl flex-wrap items-center gap-3 px-4 py-4">

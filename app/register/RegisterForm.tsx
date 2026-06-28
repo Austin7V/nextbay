@@ -4,6 +4,7 @@ import { useActionState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { registerAction, type AuthActionState } from "@/lib/authActions";
+import { LoadingDots } from "@/components/LoadingDots";
 
 const initialState: AuthActionState = {
   error: null,
@@ -38,7 +39,14 @@ export default function RegisterForm() {
       {state.error && <p className="text-sm text-destructive">{state.error}</p>}
 
       <Button type="submit" disabled={pending} className="pixel-button w-full">
-        {pending ? "Registering..." : "Register"}
+        {pending ? (
+          <>
+            Registering
+            <LoadingDots />
+          </>
+        ) : (
+          "Register"
+        )}
       </Button>
     </form>
   );

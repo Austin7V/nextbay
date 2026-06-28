@@ -2,6 +2,7 @@
 
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { sleep } from "./sleep";
 
 export type AuthActionState = {
   error: string | null;
@@ -17,7 +18,7 @@ export async function loginAction(
       error: "Server configuration error.",
     };
   }
-
+  await sleep(5000);
   const username = formData.get("username");
   const password = formData.get("password");
 
@@ -62,6 +63,7 @@ export async function registerAction(
       error: "Server configuration error.",
     };
   }
+  await sleep(5000);
 
   const username = formData.get("username");
   const password = formData.get("password");
