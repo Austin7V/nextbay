@@ -392,3 +392,40 @@ li,
 div {
   font-family: var(--font-pixel), monospace;
 }
+
+@media (max-width: 640px) {
+  body {
+    font-size: 12px;
+  }
+
+  h1 {
+    font-size: 1.4rem;
+    line-height: 1.6;
+  }
+
+  h2 {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  h3 {
+    font-size: 0.85rem;
+    line-height: 1.6;
+  }
+
+  p,
+  span,
+  label,
+  input,
+  textarea,
+  button,
+  a {
+    font-size: 0.7rem;
+    line-height: 1.7;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+  }
+}
