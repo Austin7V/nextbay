@@ -32,7 +32,7 @@ export default async function RootLayout({
       <body className="secret-grid min-h-screen bg-background text-foreground">
         <header className="border-b-2 border-primary bg-black/90 shadow-[0_0_24px_rgba(34,197,94,0.18)] backdrop-blur">
           <nav className="mx-auto flex max-w-6xl flex-wrap items-center gap-3 px-4 py-4">
-            <span className="matrix-glow mr-4 font-mono text-lg font-black tracking-widest text-primary">
+            <span className="terminal-text matrix-glow mr-4 text-lg font-black text-primary">
               NEXTBAY
             </span>
             <Button asChild variant="ghost" className="pixel-button">

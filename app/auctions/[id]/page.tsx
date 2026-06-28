@@ -30,8 +30,8 @@ export default async function AuctionDetailPage({
     <main className="space-y-6">
       <Card className="pixel-card terminal-panel">
         <CardHeader>
-          <CardTitle className="terminal-text text-3xl text-primary">
-            {auction.title}
+          <CardTitle className="terminal-text text-primary">
+            Bid History
           </CardTitle>
           <CardDescription className="font-mono text-muted-foreground">
             {auction.description}
@@ -63,15 +63,17 @@ export default async function AuctionDetailPage({
               {offers.map((offer) => (
                 <li
                   key={offer.id}
-                  className="rounded-lg border border-border bg-background p-3"
+                  className="rounded-none border-2 border-primary/40 bg-background p-3"
                 >
-                  <p className="font-semibold text-primary">
+                  <p className="terminal-text text-sm text-primary">
                     Amount: {offer.amount} €
                   </p>
-                  <p className="text-sm text-muted-foreground">
+
+                  <p className="terminal-text mt-2 text-xs text-muted-foreground">
                     Bidder: {offer.bidder}
                   </p>
-                  <p className="text-sm text-muted-foreground">
+
+                  <p className="terminal-text mt-2 text-xs text-muted-foreground">
                     Date: {new Date(offer.createdAt).toLocaleDateString()}
                   </p>
                 </li>

@@ -9,6 +9,8 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { sleep } from "@/lib/sleep";
+import { redirect } from "next/navigation";
+import { isAuthenticated } from "@/lib/authActions";
 
 type AuctionsPageProps = {
   searchParams: Promise<{
@@ -23,6 +25,11 @@ export default async function AuctionsPage({
 }: AuctionsPageProps) {
   const params = await searchParams;
   await sleep(10000);
+  const loggedIn = await isAuthenticated();
+
+  if (!loggedIn) {
+    redirect("/login");
+  }
 
   const page = params.page ?? "1";
   const limit = params.limit ?? "5";
