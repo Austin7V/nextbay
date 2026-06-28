@@ -14,7 +14,7 @@ export default function RegisterPage() {
       <Card className="pixel-card terminal-panel w-full max-w-md">
         <CardHeader>
           <CardTitle className="terminal-text text-primary">Register</CardTitle>
-          <CardDescription>
+          <CardDescription className="terminal-text text-xs text-muted-foreground">
             Create an account to start selling and bidding.
           </CardDescription>
         </CardHeader>
@@ -22,7 +22,7 @@ export default function RegisterPage() {
         <CardContent className="space-y-4">
           <RegisterForm />
 
-          <p className="text-sm text-muted-foreground">
+          <p className="terminal-text text-xs text-muted-foreground">
             Already have an account?{" "}
             <Link href="/login" className="text-primary hover:underline">
               Login

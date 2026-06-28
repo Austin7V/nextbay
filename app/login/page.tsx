@@ -14,7 +14,7 @@ export default function LoginPage() {
       <Card className="pixel-card terminal-panel w-full max-w-md">
         <CardHeader>
           <CardTitle className="terminal-text text-primary">Login</CardTitle>
-          <CardDescription>
+          <CardDescription className="terminal-text text-xs text-muted-foreground">
             Sign in to create auctions and place bids.
           </CardDescription>
         </CardHeader>
@@ -22,7 +22,7 @@ export default function LoginPage() {
         <CardContent className="space-y-4">
           <LoginForm />
 
-          <p className="text-sm text-muted-foreground">
+          <p className="terminal-text text-xs text-muted-foreground">
             Don&apos;t have an account?{" "}
             <Link href="/register" className="text-primary hover:underline">
               Register

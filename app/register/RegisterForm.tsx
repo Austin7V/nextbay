@@ -18,7 +18,9 @@ export default function RegisterForm() {
 
   return (
     <form action={formAction} className="space-y-4">
-      <label htmlFor="username">Username</label>
+      <label htmlFor="username" className="terminal-text text-xs text-primary">
+        Username
+      </label>
       <Input
         id="username"
         name="username"
@@ -27,7 +29,9 @@ export default function RegisterForm() {
         required
       />
 
-      <label htmlFor="password">Password</label>
+      <label htmlFor="password" className="terminal-text text-xs text-primary">
+        Password
+      </label>
       <Input
         id="password"
         name="password"
@@ -36,7 +40,9 @@ export default function RegisterForm() {
         required
       />
 
-      {state.error && <p className="text-sm text-destructive">{state.error}</p>}
+      {state.error && (
+        <p className="terminal-text text-xs text-destructive">{state.error}</p>
+      )}
 
       <Button type="submit" disabled={pending} className="pixel-button w-full">
         {pending ? (
