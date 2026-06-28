@@ -50,7 +50,7 @@ export default async function AuctionsPage({
         <Link href="/auctions/new">Create auction</Link>
       </nav>
 
-      <div>
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {auctions.map((auction) => (
           <Card key={auction.id}>
             <CardHeader>
