@@ -21,7 +21,7 @@ export default function BidForm({ auctionId, minimumAmount }: BidFormProps) {
   );
 
   return (
-    <form action={formAction}>
+    <form action={formAction} className="space-y-4">
       <input type="hidden" name="auctionId" value={auctionId} />
 
       <label htmlFor="amount">Amount</label>
@@ -33,9 +33,9 @@ export default function BidForm({ auctionId, minimumAmount }: BidFormProps) {
         required
       />
 
-      {state.error && <p>{state.error}</p>}
+      {state.error && <p className="text-sm text-destructive">{state.error}</p>}
 
-      <Button type="submit" disabled={pending}>
+      <Button type="submit" disabled={pending} className="w-full">
         {pending ? "Placing bid..." : "Place bid"}
       </Button>
     </form>
