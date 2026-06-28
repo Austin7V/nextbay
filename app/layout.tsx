@@ -22,9 +22,12 @@ export default async function RootLayout({
 
   return (
     <html lang="en" className="dark">
-      <body className="min-h-screen bg-background text-foreground">
-        <header className="border-b border-border bg-card">
-          <nav className="mx-auto flex max-w-6xl items-center gap-2 px-4 py-4">
+      <body className="secret-grid min-h-screen bg-background text-foreground">
+        <header className="border-b border-primary/30 bg-black/80 backdrop-blur">
+          <nav className="mx-auto flex max-w-6xl flex-wrap items-center gap-2 px-4 py-4">
+            <span className="matrix-glow mr-4 font-mono text-lg font-bold text-primary">
+              NEXTBAY
+            </span>
             <Button asChild variant="ghost">
               <Link href="/">Home</Link>
             </Button>
