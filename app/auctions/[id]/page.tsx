@@ -9,6 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { sleep } from "@/lib/sleep";
 
 type AuctionDetailPageProps = {
   params: Promise<{
@@ -20,6 +21,7 @@ export default async function AuctionDetailPage({
   params,
 }: AuctionDetailPageProps) {
   const { id } = await params;
+  await sleep(10000);
 
   const auction = await getAuctionById(id);
   const offers = await getOffersByAuctionId(id);

@@ -8,6 +8,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { sleep } from "@/lib/sleep";
 
 type AuctionsPageProps = {
   searchParams: Promise<{
@@ -21,6 +22,7 @@ export default async function AuctionsPage({
   searchParams,
 }: AuctionsPageProps) {
   const params = await searchParams;
+  await sleep(10000);
 
   const page = params.page ?? "1";
   const limit = params.limit ?? "5";
