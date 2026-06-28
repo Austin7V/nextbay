@@ -25,16 +25,18 @@ export default async function AuctionDetailPage({
   const offers = await getOffersByAuctionId(id);
 
   return (
-    <main>
-      <Card>
+    <main className="space-y-6">
+      <Card className="border-border bg-card">
         <CardHeader>
           <CardTitle>{auction.title}</CardTitle>
           <CardDescription>{auction.description}</CardDescription>
         </CardHeader>
 
-        <CardContent>
+        <CardContent className="space-y-2">
           <p>Starting price: {auction.startingPrice} €</p>
-          <p>Current price: {auction.currentPrice} €</p>
+          <p className="text-2xl font-bold text-primary">
+            Current price: {auction.currentPrice} €
+          </p>
           <p>Seller: {auction.seller}</p>
           <p>Ends at: {new Date(auction.endDate).toLocaleDateString()}</p>
         </CardContent>
@@ -49,12 +51,21 @@ export default async function AuctionDetailPage({
           {offers.length === 0 ? (
             <p>No offers yet.</p>
           ) : (
-            <ul>
+            <ul className="space-y-3">
               {offers.map((offer) => (
-                <li key={offer.id}>
-                  <p>Amount: {offer.amount} €</p>
-                  <p>Bidder: {offer.bidder}</p>
-                  <p>Date: {new Date(offer.createdAt).toLocaleDateString()}</p>
+                <li
+                  key={offer.id}
+                  className="rounded-lg border border-border bg-background p-3"
+                >
+                  <p className="font-semibold text-primary">
+                    Amount: {offer.amount} €
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    Bidder: {offer.bidder}
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    Date: {new Date(offer.createdAt).toLocaleDateString()}
+                  </p>
                 </li>
               ))}
             </ul>
