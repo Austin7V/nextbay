@@ -11,9 +11,9 @@ import {
 export default function LoginPage() {
   return (
     <main className="flex min-h-[70vh] items-center justify-center">
-      <Card className="w-full max-w-md">
+      <Card className="pixel-card terminal-panel w-full max-w-md">
         <CardHeader>
-          <CardTitle>Login</CardTitle>
+          <CardTitle className="terminal-text text-primary">Login</CardTitle>
           <CardDescription>
             Sign in to create auctions and place bids.
           </CardDescription>
