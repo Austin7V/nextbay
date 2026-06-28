@@ -1,7 +1,10 @@
 "use client";
 
 import { useActionState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { registerAction, type AuthActionState } from "@/lib/authActions";
+import { LoadingDots } from "@/components/LoadingDots";
 
 const initialState: AuthActionState = {
   error: null,
@@ -14,18 +17,43 @@ export default function RegisterForm() {
   );
 
   return (
-    <form action={formAction}>
-      <label htmlFor="username">Username</label>
-      <input id="username" name="username" type="text" required />
+    <form action={formAction} className="space-y-4">
+      <label htmlFor="username" className="terminal-text text-xs text-primary">
+        Username
+      </label>
+      <Input
+        id="username"
+        name="username"
+        type="text"
+        className="pixel-input"
+        required
+      />
 
-      <label htmlFor="password">Password</label>
-      <input id="password" name="password" type="password" required />
+      <label htmlFor="password" className="terminal-text text-xs text-primary">
+        Password
+      </label>
+      <Input
+        id="password"
+        name="password"
+        type="password"
+        className="pixel-input"
+        required
+      />
 
-      {state.error && <p>{state.error}</p>}
+      {state.error && (
+        <p className="terminal-text text-xs text-destructive">{state.error}</p>
+      )}
 
-      <button type="submit" disabled={pending}>
-        {pending ? "Registering..." : "Register"}
-      </button>
+      <Button type="submit" disabled={pending} className="pixel-button w-full">
+        {pending ? (
+          <>
+            Registering
+            <LoadingDots />
+          </>
+        ) : (
+          "Register"
+        )}
+      </Button>
     </form>
   );
 }

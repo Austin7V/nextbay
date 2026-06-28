@@ -5,6 +5,9 @@ import {
   createAuctionAction,
   type AuctionActionState,
 } from "@/lib/auctionsActions";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 
 const initialState: AuctionActionState = {
   error: null,
@@ -17,27 +20,39 @@ export default function CreateAuctionForm() {
   );
 
   return (
-    <form action={formAction}>
+    <form action={formAction} className="space-y-4">
       <label htmlFor="title">Title</label>
-      <input id="title" name="title" type="text" required />
+      <Input
+        id="title"
+        name="title"
+        type="text"
+        className="pixel-input"
+        required
+      />
 
       <label htmlFor="description">Description</label>
-      <textarea id="description" name="description" required />
+      <Textarea
+        id="description"
+        name="description"
+        className="pixel-input"
+        required
+      />
 
       <label htmlFor="startingPrice">Starting price</label>
-      <input
+      <Input
         id="startingPrice"
         name="startingPrice"
         type="number"
         min="1"
+        className="pixel-input"
         required
       />
 
-      {state.error && <p>{state.error}</p>}
+      {state.error && <p className="text-sm text-destructive">{state.error}</p>}
 
-      <button type="submit" disabled={pending}>
+      <Button type="submit" disabled={pending} className="pixel-button w-full">
         {pending ? "Creating..." : "Create auction"}
-      </button>
+      </Button>
     </form>
   );
 }
