@@ -11,9 +11,9 @@ import {
 export default function RegisterPage() {
   return (
     <main className="flex min-h-[70vh] items-center justify-center">
-      <Card className="w-full max-w-md">
+      <Card className="pixel-card terminal-panel w-full max-w-md">
         <CardHeader>
-          <CardTitle>Register</CardTitle>
+          <CardTitle className="terminal-text text-primary">Register</CardTitle>
           <CardDescription>
             Create an account to start selling and bidding.
           </CardDescription>
