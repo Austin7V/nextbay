@@ -21,10 +21,10 @@ export default async function RootLayout({
   const loggedIn = await isAuthenticated();
 
   return (
-    <html lang="en" className={cn("font-sans", geist.variable)}>
-      <body>
-        <header>
-          <nav>
+    <html lang="en" className="dark">
+      <body className="min-h-screen bg-background text-foreground">
+        <header className="border-b border-border bg-card">
+          <nav className="mx-auto flex max-w-6xl items-center gap-2 px-4 py-4">
             <Button asChild variant="ghost">
               <Link href="/">Home</Link>
             </Button>
@@ -59,7 +59,7 @@ export default async function RootLayout({
           </nav>
         </header>
 
-        {children}
+        <div className="mx-auto max-w-6xl px-4 py-8">{children}</div>
       </body>
     </html>
   );
