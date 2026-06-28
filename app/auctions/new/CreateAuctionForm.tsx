@@ -38,7 +38,7 @@ export default function CreateAuctionForm() {
 
       {state.error && <p className="text-sm text-destructive">{state.error}</p>}
 
-      <Button type="submit" disabled={pending}>
+      <Button type="submit" disabled={pending} className="pixel-button w-full">
         {pending ? "Creating..." : "Create auction"}
       </Button>
     </form>
