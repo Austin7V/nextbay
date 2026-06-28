@@ -20,7 +20,7 @@ export default function CreateAuctionForm() {
   );
 
   return (
-    <form action={formAction}>
+    <form action={formAction} className="space-y-4">
       <label htmlFor="title">Title</label>
       <Input id="title" name="title" type="text" required />
 
@@ -36,7 +36,7 @@ export default function CreateAuctionForm() {
         required
       />
 
-      {state.error && <p>{state.error}</p>}
+      {state.error && <p className="text-sm text-destructive">{state.error}</p>}
 
       <Button type="submit" disabled={pending}>
         {pending ? "Creating..." : "Create auction"}
